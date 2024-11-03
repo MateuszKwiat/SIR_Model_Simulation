@@ -83,15 +83,6 @@ void Slider::initialize_single_text(sf::Text& text, const std::string& str, cons
     text.setPosition(position);
 }
 
-void Slider::draw(sf::RenderWindow& window) const {
-    window.draw(*slider_body);
-    window.draw(*slider_range);
-    window.draw(*slider);
-    window.draw(*label);
-    window.draw(*range_low);
-    window.draw(*range_high);
-}
-
 void Slider::update(float& x) {
 
 }

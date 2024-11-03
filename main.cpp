@@ -1,10 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include "Slider.h"
+#include "ExtendedRenderWindow.h"
 
 int main()
 {
     float value = 0;
-    sf::RenderWindow window(sf::VideoMode(400, 400), "SFML works!");
+    ExtendedRenderWindow window(sf::VideoMode(400, 400), "SFML works!");
     Slider slider(window, &value);
 
     while (window.isOpen())
@@ -18,7 +19,7 @@ int main()
 
         window.clear();
 
-        slider.draw(window);
+        window.draw(slider);
 
         window.display();
     }

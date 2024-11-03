@@ -22,7 +22,8 @@ private:
 
 public:
     explicit Slider(const sf::RenderWindow& window, float* val);
-    void draw(sf::RenderWindow& window) const;
     void update(float& x);
     ~Slider();
+
+    friend class ExtendedRenderWindow;
 };
