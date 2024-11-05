@@ -11,14 +11,22 @@
 
 #include <iostream>
 
-Slider::Slider(const sf::RenderWindow& window, float* val) {
+Slider::Slider(const sf::RenderWindow& window,
+               const sf::Vector2f& slider_to_window_proportions,
+               const sf::Vector2f& position,
+               const std::string& str,
+               float* val,
+               const sf::Vector2f& range) : low(range.x), high(range.y) {
+
     value = val;
-    this->initialize_slider_body(window);
+    this->initialize_slider_body(window, slider_to_window_proportions, position);
     this->initialize_slider_range();
     this->initialize_slider();
     this->initialize_slider_range();
-    this->initialize_texts();
+    this->initialize_texts(str, range);
 }
+
+// slider_body_size = 160, 70
 
 void Slider::initialize_slider() {
     const auto size = sf::Vector2f(15.f, 25.f);
@@ -31,11 +39,14 @@ void Slider::initialize_slider() {
     slider->setFillColor(sf::Color::Red);
 }
 
-void Slider::initialize_slider_body(const sf::RenderWindow& window) {
-    const auto size = sf::Vector2f(160.f, 70.f);
+void Slider::initialize_slider_body(const sf::RenderWindow& window, const sf::Vector2f& slider_to_window_proportions,
+                                    const sf::Vector2f& pos) {
+
+    const auto size = sf::Vector2f(static_cast<float>(window.getSize().x) * slider_to_window_proportions.x,
+                                   static_cast<float>(window.getSize().y) * slider_to_window_proportions.y);
+
     const auto origin = sf::Vector2f(size.x / 2.f, size.y / 2.f);
-    const auto position = sf::Vector2f(static_cast<float>(window.getSize().x) / 2.f,
-                                       static_cast<float>(window.getSize().y) / 2.f);
+    const auto position = pos;
 
     slider_body = new sf::RectangleShape(size);
     slider_body->setOrigin(origin);
