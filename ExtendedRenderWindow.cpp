@@ -8,7 +8,6 @@ ExtendedRenderWindow::ExtendedRenderWindow(sf::VideoMode video_mode, const char 
 
 void ExtendedRenderWindow::draw(const Slider &slider) {
     RenderWindow::draw(*slider.slider_body);
-    RenderWindow::draw(*slider.slider_body);
     RenderWindow::draw(*slider.slider_range);
     RenderWindow::draw(*slider.slider);
     RenderWindow::draw(*slider.label);
