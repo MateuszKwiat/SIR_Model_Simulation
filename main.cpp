@@ -23,6 +23,7 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        slider.update(window);
 
         window.clear();
 

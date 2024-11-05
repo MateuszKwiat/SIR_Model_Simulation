@@ -2,11 +2,13 @@
 
 #include <SFML/Graphics.hpp>
 
+class ExtendedRenderWindow;
+
 class Slider {
 private:
     float* value;
-    int low;
-    int high;
+    float min{};
+    float max{};
     std::string label_str;
     sf::RectangleShape* slider{};
     sf::RectangleShape* slider_body{};
@@ -26,6 +28,13 @@ private:
     void initialize_texts(const sf::Vector2i& range, unsigned int label_char_size, unsigned int ranges_char_size);
     void initialize_slider_range();
     void initialize_slider();
+    void normalize() const;
+    bool slider_is_pressed(const ExtendedRenderWindow& window) const;
+    bool slider_is_in_range() const;
+    void follow_mouse(const ExtendedRenderWindow& window) const;
+    bool slider_is_outside_range_left() const;
+    bool slider_is_outside_range_right() const;
+    void place_back_on_range(bool left) const;
 
 public:
     explicit Slider(const sf::RenderWindow& window,
@@ -37,7 +46,7 @@ public:
                     unsigned int ranges_char_size,
                     const sf::Vector2i& range = {0, 1});
 
-    void update(float& x);
+    void update(const ExtendedRenderWindow& window) const;
     ~Slider();
 
     friend class ExtendedRenderWindow;
