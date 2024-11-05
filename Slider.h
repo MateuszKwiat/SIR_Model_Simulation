@@ -25,7 +25,7 @@ private:
     void initialize_single_text(sf::Text& text, const std::string& str, const sf::Vector2f& position,
                                 unsigned int char_size) const;
 
-    void initialize_texts(const sf::Vector2i& range, unsigned int label_char_size, unsigned int ranges_char_size);
+    void initialize_texts(unsigned int label_char_size, unsigned int ranges_char_size);
     void initialize_slider_range();
     void initialize_slider();
     float normalize() const;
@@ -45,8 +45,7 @@ public:
                     const std::string& str,
                     float* val,
                     unsigned int label_char_size,
-                    unsigned int ranges_char_size,
-                    const sf::Vector2i& range = {0, 1});
+                    unsigned int ranges_char_size);
 
     void update(const ExtendedRenderWindow& window) const;
     ~Slider();

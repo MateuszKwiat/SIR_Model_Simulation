@@ -13,15 +13,14 @@ Slider::Slider(const sf::RenderWindow& window,
                const sf::Vector2f& position,
                const std::string& str,
                float* val,
-               unsigned int label_char_size,
-               unsigned int ranges_char_size,
-               const sf::Vector2i& range) : label_str(str + ": ") {
+               const unsigned int label_char_size,
+               const unsigned int ranges_char_size) : label_str(str + ": ") {
 
     value = val;
     this->initialize_slider_body(window, slider_to_window_proportions, position);
     this->initialize_slider_range();
     this->initialize_slider();
-    this->initialize_texts(range, label_char_size, ranges_char_size);
+    this->initialize_texts(label_char_size, ranges_char_size);
 
     min = slider_range->getPosition().x - slider_range->getSize().x / 2.f + slider->getSize().x / 2.f;
     max = slider_range->getPosition().x + slider_range->getSize().x / 2.f - slider->getSize().x / 2.f;
@@ -70,7 +69,7 @@ void Slider::initialize_slider_range() {
     slider_range->setFillColor(sf::Color::Black);
 }
 
-void Slider::initialize_texts(const sf::Vector2i& range, const unsigned int label_char_size, const unsigned int ranges_char_size) {
+void Slider::initialize_texts(const unsigned int label_char_size, const unsigned int ranges_char_size) {
 
     label = new sf::Text();
     range_low = new sf::Text();
@@ -85,11 +84,11 @@ void Slider::initialize_texts(const sf::Vector2i& range, const unsigned int labe
 
     position = sf::Vector2f(slider_range->getPosition().x - slider_range->getSize().x / 2.f - range_label_offset,
                             slider_range->getPosition().y - slider_range->getSize().y / 4.f);
-    this->initialize_single_text(*range_low, std::to_string(range.x), position, ranges_char_size);
+    this->initialize_single_text(*range_low, "0", position, ranges_char_size);
 
     position = sf::Vector2f(slider_range->getPosition().x + slider_range->getSize().x / 2.f + range_label_offset,
                             slider_range->getPosition().y - slider_range->getSize().y / 4.f);
-    this->initialize_single_text(*range_high, std::to_string(range.y), position, ranges_char_size);
+    this->initialize_single_text(*range_high, "1", position, ranges_char_size);
 }
 
 void Slider::initialize_single_text(sf::Text& text, const std::string& str, const sf::Vector2f& position, unsigned int char_size) const {
