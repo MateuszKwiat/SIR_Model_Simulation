@@ -2,15 +2,10 @@
 // Created by Mateusz Kwiatkowski on 03/11/2024.
 //
 
-//  TODO
-// add responsiveness to mouse
-// finally make it possible to change the value of value XD
-
-#include "Slider.h"
-
 #include <iostream>
 #include <format>
 
+#include "Slider.h"
 #include "ExtendedRenderWindow.h"
 
 Slider::Slider(const sf::RenderWindow& window,
@@ -27,12 +22,15 @@ Slider::Slider(const sf::RenderWindow& window,
     this->initialize_slider_range();
     this->initialize_slider();
     this->initialize_texts(range, label_char_size, ranges_char_size);
+
+    min = slider_range->getPosition().x - slider_range->getSize().x / 2.f + slider->getSize().x / 2.f;
+    max = slider_range->getPosition().x + slider_range->getSize().x / 2.f - slider->getSize().x / 2.f;
 }
 
 // slider_body_size = 160, 70
 
-void Slider::normalize() const {
-    *value = (slider->getPosition().x - min) / (max - min);
+float Slider::normalize() const {
+    return (slider->getPosition().x - min) / (max - min);
 }
 
 void Slider::initialize_slider() {
@@ -70,8 +68,6 @@ void Slider::initialize_slider_range() {
     slider_range->setOrigin(origin);
     slider_range->setPosition(position);
     slider_range->setFillColor(sf::Color::Black);
-    min = slider_range->getPosition().x - slider_range->getSize().x / 2.f;
-    max = slider_range->getPosition().x + slider_range->getSize().x / 2.f;
 }
 
 void Slider::initialize_texts(const sf::Vector2i& range, const unsigned int label_char_size, const unsigned int ranges_char_size) {
@@ -140,15 +136,28 @@ void Slider::place_back_on_range(const bool left) const {
     }
 }
 
+void Slider::update_value() const {
+    *value = normalize();
+}
+
+void Slider::update_label() const {
+    label->setString(label_str + std::format("{:.2f}", *value));
+}
+
+
 void Slider::update(const ExtendedRenderWindow& window) const {
     if (slider_is_pressed(window) && slider_is_in_range()) {
         this->follow_mouse(window);
+        this->update_value();
         if (slider_is_outside_range_left()) {
             this->place_back_on_range(true);
+            *value = 0.f;
         }
         if (slider_is_outside_range_right()) {
             this->place_back_on_range(false);
+            *value = 1.f;
         }
+        this->update_label();
     }
 }
 

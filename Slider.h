@@ -28,13 +28,15 @@ private:
     void initialize_texts(const sf::Vector2i& range, unsigned int label_char_size, unsigned int ranges_char_size);
     void initialize_slider_range();
     void initialize_slider();
-    void normalize() const;
+    float normalize() const;
     bool slider_is_pressed(const ExtendedRenderWindow& window) const;
     bool slider_is_in_range() const;
     void follow_mouse(const ExtendedRenderWindow& window) const;
     bool slider_is_outside_range_left() const;
     bool slider_is_outside_range_right() const;
     void place_back_on_range(bool left) const;
+    void update_value() const;
+    void update_label() const;
 
 public:
     explicit Slider(const sf::RenderWindow& window,

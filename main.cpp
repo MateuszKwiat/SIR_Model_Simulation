@@ -1,10 +1,12 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
+
 #include "Slider.h"
 #include "ExtendedRenderWindow.h"
 
 int main()
 {
-    float value = 0;
+    float value = 0.5f;
     auto proportions = sf::Vector2f(0.5f, 0.25f);
     auto position = sf::Vector2f(200, 200);
     const std::string str = "Test";
