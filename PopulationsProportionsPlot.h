@@ -14,14 +14,13 @@ private:
     const unsigned int* susceptible_count{};
     const unsigned int* infectious_count{};
     const unsigned int* recovered_count{};
-    sf::Vector2f susceptible_bar_size{};
-    sf::Vector2f infectious_bar_size{};
-    sf::Vector2f recovered_bar_size{};
     const unsigned int population_count{};
 
 private:
     void update_sizes();
     void initialize_bars();
+    void initialize_single_bar(PopulationBar** bar, const sf::Color &color, unsigned int count,
+                               float bars_spacing, sf::Vector2f &current_position);
 
 public:
     PopulationsProportionsPlot(const sf::Vector2f& position, const sf::Vector2f& size, const unsigned int* susceptible_count,

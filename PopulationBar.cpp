@@ -4,8 +4,7 @@
 
 #include "PopulationBar.h"
 
-PopulationBar::PopulationBar(const sf::Vector2f& position, const sf::Vector2f& size, const sf::Color& color) {
-    this->setPosition(position);
+PopulationBar::PopulationBar(const sf::Vector2f& size, const sf::Color& color) {
     this->setSize(size);
     this->setFillColor(color);
 }

@@ -16,17 +16,22 @@ PopulationsProportionsPlot::PopulationsProportionsPlot(const sf::Vector2f& posit
     this->initialize_bars();
 }
 
+void PopulationsProportionsPlot::initialize_single_bar(PopulationBar** bar, const sf::Color &color, const unsigned int count,
+                                                       const float bars_spacing, sf::Vector2f &current_position) {
+    const float bar_height = this->getSize().y * (static_cast<float>(count) / static_cast<float>(population_count));
+    *bar = new PopulationBar(sf::Vector2f(bars_spacing * 2, bar_height), color);
+    (*bar)->setPosition(current_position);
+    current_position.x += bars_spacing * 3;
+}
+
 void PopulationsProportionsPlot::initialize_bars() {
     const float bars_spacing = this->getSize().x / 8.f;
+    float bar_height = 0.f;
     sf::Vector2f current_position = this->getPosition();
 
-    susceptptible_bar_size = sf::Vector2f(bars_spacing * 2, );
-    susceptible_population_bar = new PopulationBar(current_position, sf::Vector2f(bars_spacing * 2, size.y), sf::Color::Green);
-    current_position.x += bars_spacing * 3;
-    infectious_population_bar = new PopulationBar(current_position, sf::Vector2f(bars_spacing * 2, size.y), sf::Color::Red);
-    current_position.x += bars_spacing * 3;
-    recovered_population_bar = new PopulationBar(current_position, sf::Vector2f(bars_spacing * 2, size.y), sf::Color::White);
-
+    initialize_single_bar(&susceptible_population_bar, sf::Color::Green, *susceptible_count, bars_spacing, current_position);
+    initialize_single_bar(&infectious_population_bar, sf::Color::Red, *infectious_count, bars_spacing, current_position);
+    initialize_single_bar(&recovered_population_bar, sf::Color::White, *recovered_count, bars_spacing, current_position);
 }
 
 PopulationsProportionsPlot::~PopulationsProportionsPlot() {
