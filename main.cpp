@@ -20,7 +20,7 @@ int main()
     //               &value, 20u, 14u);
     unsigned int c1 = 100u;
     unsigned int c2 = 50u;
-    unsigned int c3 = 25u;
+    unsigned int c3 = 70u;
     PopulationsProportionsPlot plot(sf::Vector2f(50.f, 50.f), sf::Vector2f(300.f, 300.f),
         &c1, &c2, &c3, c1 + c2 + c3);
     while (window.isOpen())

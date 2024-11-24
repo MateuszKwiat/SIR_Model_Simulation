@@ -20,6 +20,7 @@ void PopulationsProportionsPlot::initialize_single_bar(PopulationBar** bar, cons
                                                        const float bars_spacing, sf::Vector2f &current_position) {
     const float bar_height = this->getSize().y * (static_cast<float>(count) / static_cast<float>(population_count));
     *bar = new PopulationBar(sf::Vector2f(bars_spacing * 2, bar_height), color);
+    current_position.y = this->getPosition().y + (this->getSize().y - bar_height);
     (*bar)->setPosition(current_position);
     current_position.x += bars_spacing * 3;
 }
