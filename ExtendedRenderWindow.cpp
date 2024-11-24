@@ -14,3 +14,10 @@ void ExtendedRenderWindow::draw(const Slider &slider) {
     RenderWindow::draw(*slider.range_low);
     RenderWindow::draw(*slider.range_high);
 }
+
+void ExtendedRenderWindow::draw(const PopulationsProportionsPlot& plot) {
+    RenderWindow::draw(plot);
+    RenderWindow::draw(*plot.get_susceptible_population_bar());
+    RenderWindow::draw(*plot.get_infectious_population_bar());
+    RenderWindow::draw(*plot.get_recovered_population_bar());
+}

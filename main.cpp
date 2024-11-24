@@ -3,20 +3,26 @@
 
 #include "Slider.h"
 #include "ExtendedRenderWindow.h"
+#include "PopulationsProportionsPlot.h"
 
 int main()
 {
-    float value = 0.5f;
-    auto proportions = sf::Vector2f(0.5f, 0.25f);
-    auto position = sf::Vector2f(200, 200);
-    const std::string str = "Test";
     ExtendedRenderWindow window(sf::VideoMode(400, 400), "SFML works!");
-    Slider slider(window,
-                  proportions,
-                  position,
-                  str,
-                  &value, 20u, 14u);
 
+    // float value = 0.5f;
+    // auto proportions = sf::Vector2f(0.5f, 0.25f);
+    // auto position = sf::Vector2f(200, 200);
+    // const std::string str = "Test";
+    // Slider slider(window,
+    //               proportions,
+    //               position,
+    //               str,
+    //               &value, 20u, 14u);
+    unsigned int c1 = 0.f;
+    unsigned int c2 = 0.f;
+    unsigned int c3 = 0.f;
+    PopulationsProportionsPlot plot(sf::Vector2f(50.f, 50.f), sf::Vector2f(300.f, 300.f),
+        &c1, &c2, &c3);
     while (window.isOpen())
     {
         sf::Event event;
@@ -25,11 +31,11 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        slider.update(window);
+        // slider.update(window);
 
         window.clear();
-
-        window.draw(slider);
+        window.draw(plot);
+        // window.draw(slider);
 
         window.display();
     }
