@@ -39,9 +39,10 @@ void PopulationsProportionsPlot::initialize_single_bar(PopulationBar** bar, cons
 }
 
 void PopulationsProportionsPlot::initialize_bars() {
-    const float bars_spacing = plot_body->getSize().x / 8.f;
+    constexpr float first_bar_spacing = 5.f;
+    const float bars_spacing = (plot_body->getSize().x - first_bar_spacing) / 8.f;
     float bar_height = 0.f;
-    sf::Vector2f current_position = plot_body->getPosition();
+    auto current_position = sf::Vector2f(plot_body->getPosition().x + first_bar_spacing, plot_body->getSize().y);
 
     initialize_single_bar(&susceptible_population_bar, sf::Color::Green, *susceptible_count, bars_spacing, current_position);
     initialize_single_bar(&infectious_population_bar, sf::Color::Red, *infectious_count, bars_spacing, current_position);
