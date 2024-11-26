@@ -17,7 +17,8 @@ void ExtendedRenderWindow::draw(const Slider &slider) {
 
 void ExtendedRenderWindow::draw(const PopulationsProportionsPlot& plot) {
     RenderWindow::draw(plot);
-    RenderWindow::draw(*plot.get_susceptible_population_bar());
-    RenderWindow::draw(*plot.get_infectious_population_bar());
-    RenderWindow::draw(*plot.get_recovered_population_bar());
+    RenderWindow::draw(plot.plot_body);
+    // RenderWindow::draw(*plot.susceptible_population_bar);
+    // RenderWindow::draw(*plot.infectious_population_bar);
+    // RenderWindow::draw(*plot.recovered_population_bar);
 }

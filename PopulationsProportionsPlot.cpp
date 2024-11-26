@@ -9,11 +9,23 @@ PopulationsProportionsPlot::PopulationsProportionsPlot(const sf::Vector2f& posit
                                    : population_count(population_count) {
     this->setPosition(position);
     this->setSize(size);
-    this->setFillColor(sf::Color::Transparent);
+    this->setFillColor(sf::Color::White);
     this->susceptible_count = susceptible_count;
     this->infectious_count = infectious_count;
     this->recovered_count = recovered_count;
+    this->initialize_plot_body();
     this->initialize_bars();
+}
+
+void PopulationsProportionsPlot::initialize_plot_body() {
+    constexpr float plot_body_proportion = 1.f / 8.f;
+    plot_body.setPosition(sf::Vector2f(this->getPosition().x + this->getSize().x * plot_body_proportion,
+                                       this->getPosition().y + this->getSize().y * plot_body_proportion));
+
+    plot_body.setSize(sf::Vector2f(this->getSize().x - this->getSize().x * plot_body_proportion,
+                                   this->getSize().y - this->getSize().y * plot_body_proportion * 2.f));
+
+    plot_body.setFillColor(sf::Color::Black);
 }
 
 void PopulationsProportionsPlot::initialize_single_bar(PopulationBar** bar, const sf::Color &color, const unsigned int count,
