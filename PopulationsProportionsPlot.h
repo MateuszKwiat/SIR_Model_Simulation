@@ -8,7 +8,7 @@
 
 class PopulationsProportionsPlot : public sf::RectangleShape {
 private:
-    sf::RectangleShape plot_body{};
+    sf::RectangleShape* plot_body{};
     PopulationBar* susceptible_population_bar{};
     PopulationBar* infectious_population_bar{};
     PopulationBar* recovered_population_bar{};

@@ -18,36 +18,38 @@ PopulationsProportionsPlot::PopulationsProportionsPlot(const sf::Vector2f& posit
 }
 
 void PopulationsProportionsPlot::initialize_plot_body() {
-    constexpr float plot_body_proportion = 1.f / 8.f;
-    plot_body.setPosition(sf::Vector2f(this->getPosition().x + this->getSize().x * plot_body_proportion,
+    constexpr float plot_body_proportion = 1.f / 9.f;
+    plot_body = new sf::RectangleShape();
+    plot_body->setPosition(sf::Vector2f(this->getPosition().x + this->getSize().x * plot_body_proportion,
                                        this->getPosition().y + this->getSize().y * plot_body_proportion));
 
-    plot_body.setSize(sf::Vector2f(this->getSize().x - this->getSize().x * plot_body_proportion,
+    plot_body->setSize(sf::Vector2f(this->getSize().x - this->getSize().x * plot_body_proportion,
                                    this->getSize().y - this->getSize().y * plot_body_proportion * 2.f));
 
-    plot_body.setFillColor(sf::Color::Black);
+    plot_body->setFillColor(sf::Color::Black);
 }
 
 void PopulationsProportionsPlot::initialize_single_bar(PopulationBar** bar, const sf::Color &color, const unsigned int count,
                                                        const float bars_spacing, sf::Vector2f &current_position) {
-    const float bar_height = this->getSize().y * (static_cast<float>(count) / static_cast<float>(population_count));
+    const float bar_height = plot_body->getSize().y * (static_cast<float>(count) / static_cast<float>(population_count));
     *bar = new PopulationBar(sf::Vector2f(bars_spacing * 2, bar_height), color);
-    current_position.y = this->getPosition().y + (this->getSize().y - bar_height);
+    current_position.y = plot_body->getPosition().y + (plot_body->getSize().y - bar_height);
     (*bar)->setPosition(current_position);
     current_position.x += bars_spacing * 3;
 }
 
 void PopulationsProportionsPlot::initialize_bars() {
-    const float bars_spacing = this->getSize().x / 8.f;
+    const float bars_spacing = plot_body->getSize().x / 8.f;
     float bar_height = 0.f;
-    sf::Vector2f current_position = this->getPosition();
+    sf::Vector2f current_position = plot_body->getPosition();
 
     initialize_single_bar(&susceptible_population_bar, sf::Color::Green, *susceptible_count, bars_spacing, current_position);
     initialize_single_bar(&infectious_population_bar, sf::Color::Red, *infectious_count, bars_spacing, current_position);
-    initialize_single_bar(&recovered_population_bar, sf::Color::White, *recovered_count, bars_spacing, current_position);
+    initialize_single_bar(&recovered_population_bar, sf::Color::Blue, *recovered_count, bars_spacing, current_position);
 }
 
 PopulationsProportionsPlot::~PopulationsProportionsPlot() {
+    delete plot_body;
     delete susceptible_population_bar;
     delete infectious_population_bar;
     delete recovered_population_bar;
