@@ -5,10 +5,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "PopulationBar.h"
+#include "PlotBody.h"
 
-class PopulationsProportionsPlot : public sf::RectangleShape {
+class PopulationsProportionsPlot final : public sf::RectangleShape {
 private:
-    sf::RectangleShape* plot_body{};
+    PlotBody* plot_body{};
     PopulationBar* susceptible_population_bar{};
     PopulationBar* infectious_population_bar{};
     PopulationBar* recovered_population_bar{};
