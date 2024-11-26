@@ -12,4 +12,20 @@ PlotBody::PlotBody(const sf::Vector2f& plot_position, const sf::Vector2f& plot_s
                                    plot_size.y - plot_size.y * plot_body_proportion * 2.f));
 
     this->setFillColor(sf::Color::Black);
+
+    this->initialize_lines();
+}
+
+void PlotBody::initialize_lines() {
+    auto current_position = sf::Vector2f(this->getPosition().x, this->getPosition().y + this->getSize().y / 4.f);
+    const auto line_size = sf::Vector2f(this->getSize().x, 1.f);
+
+    for (auto & line : lines) {
+        line = new sf::RectangleShape();
+        line->setSize(line_size);
+        line->setOrigin(line->getPosition().x, line->getSize().y / 2);
+        line->setPosition(current_position);
+        line->setFillColor(sf::Color::White);
+        current_position.y += this->getSize().y / 4.f;
+    }
 }
