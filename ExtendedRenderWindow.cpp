@@ -18,10 +18,14 @@ void ExtendedRenderWindow::draw(const Slider &slider) {
 void ExtendedRenderWindow::draw(const PopulationsProportionsPlot& plot) {
     RenderWindow::draw(plot);
     RenderWindow::draw(*plot.plot_body);
-    for (auto line : plot.plot_body->lines) {
+    for (const auto line : plot.plot_body->lines) {
         RenderWindow::draw(*line);
     }
     RenderWindow::draw(*plot.susceptible_population_bar);
     RenderWindow::draw(*plot.infectious_population_bar);
     RenderWindow::draw(*plot.recovered_population_bar);
+    RenderWindow::draw(*plot.text_annotations->plot_label);
+    for (const auto tick : *plot.text_annotations->y_ticks) {
+        RenderWindow::draw(*tick);
+    }
 }

@@ -75,7 +75,7 @@ void Slider::initialize_texts(const unsigned int label_char_size, const unsigned
     range_low = new sf::Text();
     range_high = new sf::Text();
 
-    if(!font.loadFromFile("/Users/mateuszkwiatkowski/Projects/sir_model_simulation/PixeloidMono-d94EV.ttf")) {
+    if(!font.loadFromFile("/Users/mateuszkwiatkowski/Projects/sir_model_simulation/font.ttf")) {
         std::cerr << "Failed to load font." << std::endl;
     }
     const float range_label_offset = slider_body->getSize().x * 0.0625f;

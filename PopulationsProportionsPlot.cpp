@@ -16,6 +16,8 @@ PopulationsProportionsPlot::PopulationsProportionsPlot(const sf::Vector2f& posit
 
     this->initialize_plot_body();
     this->initialize_bars();
+
+    text_annotations = new TextAnnotations(this->getSize(), this->getPosition(), *plot_body->get_lines());
 }
 
 void PopulationsProportionsPlot::initialize_plot_body() {
@@ -24,7 +26,7 @@ void PopulationsProportionsPlot::initialize_plot_body() {
 }
 
 void PopulationsProportionsPlot::initialize_single_bar(PopulationBar** bar, const sf::Color &color, const unsigned int count,
-                                                       const float bars_spacing, sf::Vector2f &current_position) {
+                                                       const float bars_spacing, sf::Vector2f &current_position) const {
     const float bar_height = plot_body->getSize().y * (static_cast<float>(count) / static_cast<float>(population_count));
     *bar = new PopulationBar(sf::Vector2f(bars_spacing * 2, bar_height), color);
     current_position.y = plot_body->getPosition().y + (plot_body->getSize().y - bar_height);
@@ -35,7 +37,6 @@ void PopulationsProportionsPlot::initialize_single_bar(PopulationBar** bar, cons
 void PopulationsProportionsPlot::initialize_bars() {
     constexpr float first_bar_spacing = 5.f;
     const float bars_spacing = (plot_body->getSize().x - first_bar_spacing) / 8.f;
-    float bar_height = 0.f;
     auto current_position = sf::Vector2f(plot_body->getPosition().x + first_bar_spacing, plot_body->getSize().y);
 
     initialize_single_bar(&susceptible_population_bar, sf::Color::Green, *susceptible_count, bars_spacing, current_position);

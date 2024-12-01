@@ -4,7 +4,7 @@
 
 #include "PlotBody.h"
 
-PlotBody::PlotBody(const sf::Vector2f& plot_position, const sf::Vector2f& plot_size, float plot_body_proportion) {
+PlotBody::PlotBody(const sf::Vector2f& plot_position, const sf::Vector2f& plot_size, const float plot_body_proportion) {
     this->setPosition(sf::Vector2f(plot_position.x + plot_size.x * plot_body_proportion,
                                        plot_position.y + plot_size.y * plot_body_proportion));
 
@@ -16,11 +16,18 @@ PlotBody::PlotBody(const sf::Vector2f& plot_position, const sf::Vector2f& plot_s
     this->initialize_lines();
 }
 
+PlotBody::~PlotBody() {
+    for (const auto& line : lines) {
+        delete line;
+    }
+}
+
+
 void PlotBody::initialize_lines() {
     auto current_position = sf::Vector2f(this->getPosition().x, this->getPosition().y + this->getSize().y / 4.f);
     const auto line_size = sf::Vector2f(this->getSize().x, 1.f);
 
-    for (auto & line : lines) {
+    for (auto& line : lines) {
         line = new sf::RectangleShape();
         line->setSize(line_size);
         line->setOrigin(line->getPosition().x, line->getSize().y / 2);
