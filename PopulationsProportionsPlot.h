@@ -21,7 +21,6 @@ private:
     TextAnnotations* text_annotations{};
 
 private:
-    void update_sizes();
     void initialize_bars();
     void initialize_single_bar(PopulationBar** bar, const sf::Color &color, unsigned int count,
                                float bars_spacing, sf::Vector2f &current_position) const;

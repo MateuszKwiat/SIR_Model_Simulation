@@ -28,4 +28,7 @@ void ExtendedRenderWindow::draw(const PopulationsProportionsPlot& plot) {
     for (const auto tick : *plot.text_annotations->y_ticks) {
         RenderWindow::draw(*tick);
     }
+    RenderWindow::draw(*plot.text_annotations->susceptible_label);
+    RenderWindow::draw(*plot.text_annotations->infectious_label);
+    RenderWindow::draw(*plot.text_annotations->recovered_label);
 }

@@ -17,7 +17,9 @@ PopulationsProportionsPlot::PopulationsProportionsPlot(const sf::Vector2f& posit
     this->initialize_plot_body();
     this->initialize_bars();
 
-    text_annotations = new TextAnnotations(this->getSize(), this->getPosition(), *plot_body->get_lines());
+    text_annotations = new TextAnnotations(this->getSize(), this->getPosition(), *plot_body->get_lines(),
+        {*susceptible_population_bar, *infectious_population_bar, *recovered_population_bar },
+        plot_body->getSize());
 }
 
 void PopulationsProportionsPlot::initialize_plot_body() {
@@ -49,10 +51,6 @@ PopulationsProportionsPlot::~PopulationsProportionsPlot() {
     delete susceptible_population_bar;
     delete infectious_population_bar;
     delete recovered_population_bar;
-}
-
-void PopulationsProportionsPlot::update_sizes() {
-
 }
 
 void PopulationsProportionsPlot::update() {
