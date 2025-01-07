@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 #include <SFML/Graphics.hpp>
 
 #include "Slider.h"
@@ -8,8 +9,10 @@
 
 int main()
 {
+    std::random_device rd;
+    std::mt19937 gen(rd());
     ExtendedRenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
-    // window.setFramerateLimit(500);
+    window.setFramerateLimit(120);
     sf::Font font;
     if(!font.loadFromFile("/Users/mateuszkwiatkowski/Projects/sir_model_simulation/font.ttf")) {
         std::cerr << "Failed to load font." << std::endl;
@@ -36,7 +39,7 @@ int main()
     // ============================= Simulation window ===================================
     auto sim_size = sf::Vector2f(200.f, 200.f);
     auto sim_position = sf::Vector2f(530.f, 10.f);
-    SimulationWindow sim(sim_position, sim_size);
+    SimulationWindow sim(sim_position, sim_size,2.f, gen);
 
     while (window.isOpen())
     {
@@ -48,8 +51,7 @@ int main()
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
                 window.close();
         }
-        sim.test_particle();
-
+        sim.update();
         slider.update(window);
 
         window.clear();

@@ -9,7 +9,7 @@ class Particle : public sf::CircleShape {
 private:
 
 public:
-    Particle(const sf::Vector2f& pos);
-    void move_particle(const sf::Rect<float>& window);
+    Particle(float radius, const sf::Vector2f& pos);
+    void update(const sf::Vector2f& vec, const sf::Rect<float>& window);
 };
 

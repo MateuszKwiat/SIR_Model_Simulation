@@ -4,26 +4,30 @@
 
 #include "Particle.h"
 
-Particle::Particle(const sf::Vector2f &pos) {
+Particle::Particle(const float radius, const sf::Vector2f &pos) {
     this->setPosition(pos);
-    this->setRadius(5);
-    this->setFillColor(sf::Color::Green);
+    this->setRadius(radius);
+    this->setFillColor(sf::Color(68, 107, 118, 255));
 }
 
-void Particle::move_particle(const sf::Rect<float> &window) {
+void Particle::update(const sf::Vector2f& vec, const sf::Rect<float>& window_rect) {
     const auto particle_rect = this->getGlobalBounds();
-    constexpr float move_val = 0.5f;
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && particle_rect.left > window.left) {
-        this->move(-move_val, 0.f);
+    auto move_vec = sf::Vector2f();
+
+    if (particle_rect.left + vec.x > window_rect.left &&
+        particle_rect.left + vec.x + particle_rect.width < window_rect.left + window_rect.width) {
+        move_vec.x = vec.x;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && particle_rect.left + particle_rect.width < window.left + window.width) {
-        this->move(move_val, 0.f);
+    else {
+        move_vec.x = 0.f;
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && particle_rect.top > window.top) {
-        this->move(0.f, -move_val);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && particle_rect.top + particle_rect.height < window.top + window.height) {
-        this->move(0.f, move_val);
+    if (particle_rect.top + vec.y > window_rect.top &&
+        particle_rect.top + vec.y + particle_rect.height < window_rect.top + window_rect.height) {
+        move_vec.y = vec.y;
+        }
+    else {
+        move_vec.y = 0.f;
     }
 
+    this->move(move_vec);
 }

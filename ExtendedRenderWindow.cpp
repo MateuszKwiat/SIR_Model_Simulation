@@ -35,5 +35,7 @@ void ExtendedRenderWindow::draw(const PopulationsProportionsPlot& plot) {
 
 void ExtendedRenderWindow::draw(const SimulationWindow& simulation_window) {
     RenderWindow::draw(simulation_window);
-    RenderWindow::draw(*simulation_window.particle);
+    for (const auto particle : simulation_window.particles) {
+        RenderWindow::draw(*particle);
+    }
 }
