@@ -33,10 +33,13 @@ TextAnnotations::~TextAnnotations() {
     for (const auto& y_tick : *y_ticks) {
         delete y_tick;
     }
+    delete susceptible_label;
+    delete infectious_label;
+    delete recovered_label;
 }
 
 void TextAnnotations::initialize_labels(const std::array<PopulationBar, 3> &population_bars,
-                                        const sf::Vector2f& plot_body_size, const sf::Vector2f &plot_size) {
+                                        const sf::Vector2f& plot_body_size, const sf::Vector2f &plot_size) const {
 
     const auto char_size = static_cast<unsigned int>(plot_size.y / 20.f);
     constexpr float first_bar_spacing = 5.f;

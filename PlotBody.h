@@ -9,7 +9,6 @@
 class PlotBody final : public sf::RectangleShape {
 private:
     std::array<sf::RectangleShape*, 3> lines{};
-    // sf::RectangleShape* lines[3]{};
 
 private:
     void initialize_lines();

@@ -9,7 +9,7 @@ PopulationsProportionsPlot::PopulationsProportionsPlot(const sf::Vector2f& posit
                                    : population_count(population_count) {
     this->setPosition(position);
     this->setSize(size);
-    this->setFillColor(sf::Color::White);
+    this->setFillColor(sf::Color(249, 250, 250, 255));
     this->susceptible_count = susceptible_count;
     this->infectious_count = infectious_count;
     this->recovered_count = recovered_count;
@@ -41,9 +41,14 @@ void PopulationsProportionsPlot::initialize_bars() {
     const float bars_spacing = (plot_body->getSize().x - first_bar_spacing) / 8.f;
     auto current_position = sf::Vector2f(plot_body->getPosition().x + first_bar_spacing, plot_body->getSize().y);
 
-    initialize_single_bar(&susceptible_population_bar, sf::Color::Green, *susceptible_count, bars_spacing, current_position);
-    initialize_single_bar(&infectious_population_bar, sf::Color::Red, *infectious_count, bars_spacing, current_position);
-    initialize_single_bar(&recovered_population_bar, sf::Color::Blue, *recovered_count, bars_spacing, current_position);
+    initialize_single_bar(&susceptible_population_bar, sf::Color(68, 107, 118, 255),
+                          *susceptible_count, bars_spacing, current_position);
+
+    initialize_single_bar(&infectious_population_bar, sf::Color(230, 121, 101, 255),
+                          *infectious_count, bars_spacing, current_position);
+
+    initialize_single_bar(&recovered_population_bar, sf::Color(78, 77, 77, 255),
+                          *recovered_count, bars_spacing, current_position);
 }
 
 PopulationsProportionsPlot::~PopulationsProportionsPlot() {
@@ -51,6 +56,7 @@ PopulationsProportionsPlot::~PopulationsProportionsPlot() {
     delete susceptible_population_bar;
     delete infectious_population_bar;
     delete recovered_population_bar;
+    delete text_annotations;
 }
 
 void PopulationsProportionsPlot::update() {

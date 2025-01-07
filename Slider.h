@@ -19,7 +19,7 @@ private:
     sf::Text* range_high{};
 
 private:
-    void initialize_slider_body(const sf::RenderWindow& window, const sf::Vector2f& slider_to_window_proportions,
+    void initialize_slider_body(const sf::RenderWindow& window, const sf::Vector2f& size,
                                 const sf::Vector2f& pos);
 
     void initialize_single_text(sf::Text& text, const std::string& str, const sf::Vector2f& position,
@@ -40,7 +40,7 @@ private:
 
 public:
     explicit Slider(const sf::RenderWindow& window,
-                    const sf::Vector2f& slider_to_window_proportions,
+                    const sf::Vector2f& size,
                     const sf::Vector2f& position,
                     const std::string& str,
                     float* val,

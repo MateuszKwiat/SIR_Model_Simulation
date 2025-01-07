@@ -23,7 +23,7 @@ private:
                             const std::array<sf::RectangleShape*, 3>& lines);
 
     void initialize_labels(const std::array<PopulationBar, 3>& population_bars, const sf::Vector2f& plot_body_size,
-                           const sf::Vector2f& plot_size);
+                           const sf::Vector2f& plot_size) const;
 
 public:
     TextAnnotations(const sf::Vector2f& plot_size,
