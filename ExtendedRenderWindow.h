@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "Slider.h"
 #include "PopulationsProportionsPlot.h"
+#include "SimulationWindow.h"
 
 class ExtendedRenderWindow final : public sf::RenderWindow {
 public:
@@ -14,4 +15,5 @@ public:
     ExtendedRenderWindow() = default;
     void draw(const Slider& slider);
     void draw(const PopulationsProportionsPlot& plot);
+    void draw(const SimulationWindow& simulation_window);
 };

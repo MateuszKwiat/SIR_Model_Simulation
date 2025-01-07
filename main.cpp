@@ -9,6 +9,7 @@
 int main()
 {
     ExtendedRenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
+    // window.setFramerateLimit(500);
     sf::Font font;
     if(!font.loadFromFile("/Users/mateuszkwiatkowski/Projects/sir_model_simulation/font.ttf")) {
         std::cerr << "Failed to load font." << std::endl;
@@ -35,7 +36,7 @@ int main()
     // ============================= Simulation window ===================================
     auto sim_size = sf::Vector2f(200.f, 200.f);
     auto sim_position = sf::Vector2f(530.f, 10.f);
-    SimulationWindow sim(sim_position, sim_size, "Simulation");
+    SimulationWindow sim(sim_position, sim_size);
 
     while (window.isOpen())
     {
@@ -47,6 +48,8 @@ int main()
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
                 window.close();
         }
+        sim.test_particle();
+
         slider.update(window);
 
         window.clear();

@@ -4,14 +4,18 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+#include "Particle.h"
+
 class SimulationWindow : public sf::RectangleShape {
 private:
-    sf::Font font;
-    sf::Text title;
-
+    sf::Text title {};
+    Particle* particle {};
 private:
-    void initialize_title(const std::string& title);
 
 public:
-    SimulationWindow(const sf::Vector2f& pos, const sf::Vector2f& size, const std::string& title);
+    SimulationWindow(const sf::Vector2f& pos, const sf::Vector2f& size);
+    ~SimulationWindow();
+    void test_particle() const {particle->move_particle(this->getGlobalBounds());}
+
+    friend class ExtendedRenderWindow;
 };

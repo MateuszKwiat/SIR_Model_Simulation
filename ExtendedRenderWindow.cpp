@@ -32,3 +32,8 @@ void ExtendedRenderWindow::draw(const PopulationsProportionsPlot& plot) {
     RenderWindow::draw(*plot.text_annotations->infectious_label);
     RenderWindow::draw(*plot.text_annotations->recovered_label);
 }
+
+void ExtendedRenderWindow::draw(const SimulationWindow& simulation_window) {
+    RenderWindow::draw(simulation_window);
+    RenderWindow::draw(*simulation_window.particle);
+}
