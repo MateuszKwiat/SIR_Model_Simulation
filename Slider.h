@@ -22,7 +22,7 @@ private:
                                 const sf::Vector2f& pos);
 
     void initialize_single_text(sf::Text& text, const std::string& str, const sf::Vector2f& position,
-                                unsigned int char_size, const sf::Font& font) const;
+                                unsigned int char_size) const;
 
     void initialize_texts(unsigned int label_char_size, unsigned int ranges_char_size, const sf::Font& font);
     void initialize_slider_range();

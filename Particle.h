@@ -5,11 +5,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class Particle : public sf::CircleShape {
+class Particle final : public sf::CircleShape {
 private:
-
+    sf::Vector2f velocity;
 public:
-    Particle(float radius, const sf::Vector2f& pos);
-    void update(const sf::Vector2f& vec, const sf::Rect<float>& window);
+    Particle(float radius, const sf::Vector2f& pos, const sf::Vector2f& velocity);
+    void update(float angle, const sf::Rect<float>& window_rect);
 };
 

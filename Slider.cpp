@@ -68,65 +68,64 @@ void Slider::initialize_slider_range() {
 
 void Slider::initialize_texts(const unsigned int label_char_size, const unsigned int ranges_char_size, const sf::Font& font) {
 
-    label = new sf::Text();
-    range_low = new sf::Text();
-    range_high = new sf::Text();
+    label = new sf::Text(font);
+    range_low = new sf::Text(font);
+    range_high = new sf::Text(font);
 
     const float range_label_offset = slider_body->getSize().x * 0.0625f;
     auto position = sf::Vector2f(slider_body->getPosition().x, slider_body->getPosition().y - slider_body->getSize().y / 3.5f);
-    this->initialize_single_text(*label, label_str + std::format("{:.2f}", *value), position, label_char_size, font);
+    this->initialize_single_text(*label, label_str + std::format("{:.2f}", *value), position, label_char_size);
 
     position = sf::Vector2f(slider_range->getPosition().x - slider_range->getSize().x / 2.f - range_label_offset,
                             slider_range->getPosition().y - slider_range->getSize().y / 4.f);
-    this->initialize_single_text(*range_low, "0", position, ranges_char_size, font);
+    this->initialize_single_text(*range_low, "0", position, ranges_char_size);
 
     position = sf::Vector2f(slider_range->getPosition().x + slider_range->getSize().x / 2.f + range_label_offset,
                             slider_range->getPosition().y - slider_range->getSize().y / 4.f);
-    this->initialize_single_text(*range_high, "1", position, ranges_char_size, font);
+    this->initialize_single_text(*range_high, "1", position, ranges_char_size);
 }
 
 void Slider::initialize_single_text(sf::Text& text, const std::string& str, const sf::Vector2f& position,
-                                    const unsigned int char_size, const sf::Font& font) const {
-    text.setFont(font);
+                                    const unsigned int char_size) const {
     text.setString(str);
     text.setCharacterSize(char_size);
     text.setStyle(sf::Text::Bold);
     text.setFillColor(sf::Color::Black);
-    text.setOrigin(text.getLocalBounds().width / 2.f, text.getLocalBounds().height / 2.f);
+    text.setOrigin(sf::Vector2f(text.getLocalBounds().size.x / 2.f, text.getLocalBounds().size.y / 2.f));
     text.setPosition(position);
 }
 
 bool Slider::slider_is_pressed(const ExtendedRenderWindow& window) const {
-    return  sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
+    return  sf::Mouse::isButtonPressed(sf::Mouse::Button::Left) &&
         slider->getGlobalBounds().contains(sf::Vector2<float>(sf::Mouse::getPosition(window)));
 }
 
 bool Slider::slider_is_in_range() const {
-    return slider->getGlobalBounds().left > slider_range->getPosition().x - slider_range->getSize().x / 2.f &&
-           slider->getGlobalBounds().left + slider->getGlobalBounds().width < slider_range->getPosition().x + slider_range->getSize().x / 2.f;
+    return slider->getGlobalBounds().position.x > slider_range->getPosition().x - slider_range->getSize().x / 2.f &&
+           slider->getGlobalBounds().position.x + slider->getGlobalBounds().size.x < slider_range->getPosition().x + slider_range->getSize().x / 2.f;
 }
 
 void Slider::follow_mouse(const ExtendedRenderWindow& window) const {
-    slider->setPosition(static_cast<float>(sf::Mouse::getPosition(window).x), slider->getPosition().y);
+    slider->setPosition(sf::Vector2f(static_cast<float>(sf::Mouse::getPosition(window).x), slider->getPosition().y));
 }
 
 bool Slider::slider_is_outside_range_left() const {
-    return slider->getGlobalBounds().left <= slider_range->getGlobalBounds().left;
+    return slider->getGlobalBounds().position.x <= slider_range->getGlobalBounds().position.x;
 }
 
 bool Slider::slider_is_outside_range_right() const {
-    return slider->getGlobalBounds().left + slider->getGlobalBounds().width >=
-           slider_range->getGlobalBounds().left + slider_range->getGlobalBounds().width;
+    return slider->getGlobalBounds().position.x + slider->getGlobalBounds().size.x >=
+           slider_range->getGlobalBounds().position.x + slider_range->getGlobalBounds().size.x;
 }
 
 void Slider::place_back_on_range(const bool left) const {
     constexpr float offset = 0.001f;
     if (left) {
-        slider->setPosition(slider_range->getGlobalBounds().left + slider->getSize().x / 2.f + offset, slider->getPosition().y);
+        slider->setPosition(sf::Vector2f(slider_range->getGlobalBounds().position.x + slider->getSize().x / 2.f + offset, slider->getPosition().y));
     }
     else {
-        slider->setPosition(slider_range->getGlobalBounds().left + slider_range->getGlobalBounds().width -
-        slider->getSize().x / 2.f - offset, slider->getPosition().y);
+        slider->setPosition(sf::Vector2f(slider_range->getGlobalBounds().position.x + slider_range->getGlobalBounds().size.x -
+        slider->getSize().x / 2.f - offset, slider->getPosition().y));
     }
 }
 

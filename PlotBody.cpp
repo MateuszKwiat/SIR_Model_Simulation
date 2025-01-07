@@ -30,7 +30,7 @@ void PlotBody::initialize_lines() {
     for (auto& line : lines) {
         line = new sf::RectangleShape();
         line->setSize(line_size);
-        line->setOrigin(line->getPosition().x, line->getSize().y / 2);
+        line->setOrigin(sf::Vector2f(line->getPosition().x, line->getSize().y / 2));
         line->setPosition(current_position);
         line->setFillColor(sf::Color::White);
         current_position.y += this->getSize().y / 4.f;

@@ -11,10 +11,10 @@ int main()
 {
     std::random_device rd;
     std::mt19937 gen(rd());
-    ExtendedRenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
+    ExtendedRenderWindow window(sf::VideoMode({1920, 1080}), "SFML works!");
     window.setFramerateLimit(120);
     sf::Font font;
-    if(!font.loadFromFile("/Users/mateuszkwiatkowski/Projects/sir_model_simulation/font.ttf")) {
+    if(!font.openFromFile("../font.ttf")) {
         std::cerr << "Failed to load font." << std::endl;
     }
     // ================================== Slider =========================================
@@ -37,31 +37,32 @@ int main()
         &c1, &c2, &c3, c1 + c2 + c3, font);
 
     // ============================= Simulation window ===================================
-    auto sim_size = sf::Vector2f(200.f, 200.f);
-    auto sim_position = sf::Vector2f(530.f, 10.f);
-    SimulationWindow sim(sim_position, sim_size,2.f, gen);
+    // auto sim_size = sf::Vector2f(200.f, 200.f);
+    // auto sim_position = sf::Vector2f(530.f, 10.f);
+    // SimulationWindow sim(sim_position, sim_size,2.f, gen);
 
     while (window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        while (const std::optional event = window.pollEvent())
         {
-            if (event.type == sf::Event::Closed)
+            if (event->is<sf::Event::Closed>())
                 window.close();
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-                window.close();
+            else if (const auto* key_pressed = event->getIf<sf::Event::KeyPressed>())
+                if (key_pressed->scancode == sf::Keyboard::Scancode::Escape)
+                    window.close();
         }
-        sim.update();
+        // sim.update();
         slider.update(window);
 
         window.clear();
         window.draw(plot);
         window.draw(slider);
-        window.draw(sim);
+        // window.draw(sim);
 
         window.display();
     }
 
     return 0;
 }
+
 
