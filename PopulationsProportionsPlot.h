@@ -27,8 +27,14 @@ private:
     void initialize_plot_body();
 
 public:
-    PopulationsProportionsPlot(const sf::Vector2f& position, const sf::Vector2f& size, const unsigned int* susceptible_count,
-                               const unsigned int* infectious_count, const unsigned int* recovered_count, unsigned int population_count);
+    PopulationsProportionsPlot(const sf::Vector2f& position,
+                               const sf::Vector2f& size,
+                               const unsigned int* susceptible_count,
+                               const unsigned int* infectious_count,
+                               const unsigned int* recovered_count,
+                               unsigned int population_count,
+                               const sf::Font& font);
+
     ~PopulationsProportionsPlot() override;
     void update();
 

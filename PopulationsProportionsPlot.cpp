@@ -4,9 +4,13 @@
 
 #include "PopulationsProportionsPlot.h"
 
-PopulationsProportionsPlot::PopulationsProportionsPlot(const sf::Vector2f& position, const sf::Vector2f& size, const unsigned int* susceptible_count,
-                               const unsigned int* infectious_count, const unsigned int* recovered_count, unsigned int population_count)
-                                   : population_count(population_count) {
+PopulationsProportionsPlot::PopulationsProportionsPlot(const sf::Vector2f& position,
+                                                       const sf::Vector2f& size,
+                                                       const unsigned int* susceptible_count,
+                                                       const unsigned int* infectious_count,
+                                                       const unsigned int* recovered_count,
+                                                       unsigned int population_count,
+                                                       const sf::Font& font) : population_count(population_count) {
     this->setPosition(position);
     this->setSize(size);
     this->setFillColor(sf::Color(249, 250, 250, 255));
@@ -19,7 +23,7 @@ PopulationsProportionsPlot::PopulationsProportionsPlot(const sf::Vector2f& posit
 
     text_annotations = new TextAnnotations(this->getSize(), this->getPosition(), *plot_body->get_lines(),
         {*susceptible_population_bar, *infectious_population_bar, *recovered_population_bar },
-        plot_body->getSize());
+        plot_body->getSize(), font);
 }
 
 void PopulationsProportionsPlot::initialize_plot_body() {

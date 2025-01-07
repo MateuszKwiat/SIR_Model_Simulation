@@ -10,11 +10,12 @@ TextAnnotations::TextAnnotations(const sf::Vector2f &plot_size,
                                  const sf::Vector2f &plot_position,
                                  const std::array<sf::RectangleShape*, 3>& lines,
                                  const std::array<PopulationBar, 3>& population_bars,
-                                 const sf::Vector2f& plot_body_size) {
+                                 const sf::Vector2f& plot_body_size,
+                                 const sf::Font& font) {
 
-    if(!font.loadFromFile("/Users/mateuszkwiatkowski/Projects/sir_model_simulation/font.ttf")) {
-        std::cerr << "Failed to load font." << std::endl;
-    }
+    // if(!font.loadFromFile("/Users/mateuszkwiatkowski/Projects/sir_model_simulation/font.ttf")) {
+    //     std::cerr << "Failed to load font." << std::endl;
+    // }
 
     const auto text_position = sf::Vector2f(plot_position.x + plot_size.x / 2.f, plot_position.y + plot_size.y / 20.f);
 
@@ -23,9 +24,9 @@ TextAnnotations::TextAnnotations(const sf::Vector2f &plot_size,
     infectious_label = new sf::Text();
     recovered_label = new sf::Text();
 
-    this->initialize_text(plot_label, text_position, static_cast<unsigned int>(plot_size.y / 15.f), "SIR Proportions");
-    this->initialize_y_ticks(plot_size, plot_position, lines);
-    this->initialize_labels(population_bars, plot_body_size, plot_size);
+    this->initialize_text(plot_label, text_position, static_cast<unsigned int>(plot_size.y / 15.f), "SIR Proportions", font);
+    this->initialize_y_ticks(plot_size, plot_position, lines, font);
+    this->initialize_labels(population_bars, plot_body_size, plot_size, font);
 }
 
 TextAnnotations::~TextAnnotations() {
@@ -38,8 +39,8 @@ TextAnnotations::~TextAnnotations() {
     delete recovered_label;
 }
 
-void TextAnnotations::initialize_labels(const std::array<PopulationBar, 3> &population_bars,
-                                        const sf::Vector2f& plot_body_size, const sf::Vector2f &plot_size) const {
+void TextAnnotations::initialize_labels(const std::array<PopulationBar, 3> &population_bars, const sf::Vector2f& plot_body_size,
+                                        const sf::Vector2f &plot_size, const sf::Font& font) const {
 
     const auto char_size = static_cast<unsigned int>(plot_size.y / 20.f);
     constexpr float first_bar_spacing = 5.f;
@@ -52,14 +53,14 @@ void TextAnnotations::initialize_labels(const std::array<PopulationBar, 3> &popu
 
     for (int i = 0; i < 3; i++) {
         const std::string label_value = std::format("{:.2f}", population_bars[i].getSize().y / plot_body_size.y);
-        initialize_text(labels[i], label_position, char_size, labels_names[i] + label_value);
+        initialize_text(labels[i], label_position, char_size, labels_names[i] + label_value, font);
         label_position.x += bar_spacing * 3.f;
     }
 }
 
 
 void TextAnnotations::initialize_y_ticks(const sf::Vector2f& plot_size, const sf::Vector2f& plot_position,
-                                         const std::array<sf::RectangleShape*, 3>& lines) {
+                                         const std::array<sf::RectangleShape*, 3>& lines, const sf::Font& font) {
     y_ticks = new std::array<sf::Text*, 5>{};
     constexpr std::array<float, 5> ticks = { 1.f, 0.75f, 0.5f, 0.25f, 0.0f };
     const float distance_between_lines = lines[1]->getPosition().y - lines[0]->getPosition().y;
@@ -73,7 +74,8 @@ void TextAnnotations::initialize_y_ticks(const sf::Vector2f& plot_size, const sf
     }
 }
 
-void TextAnnotations::initialize_text(sf::Text *text, const sf::Vector2f &position, const unsigned int char_size, const std::string &str) const {
+void TextAnnotations::initialize_text(sf::Text *text, const sf::Vector2f &position, const unsigned int char_size,
+                                      const std::string &str, const sf::Font& font) const {
     text->setFont(font);
     text->setString(str);
     text->setCharacterSize(char_size);

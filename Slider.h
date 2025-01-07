@@ -13,7 +13,6 @@ private:
     sf::RectangleShape* slider{};
     sf::RectangleShape* slider_body{};
     sf::RectangleShape* slider_range{};
-    sf::Font font{};
     sf::Text* label{};
     sf::Text* range_low{};
     sf::Text* range_high{};
@@ -23,17 +22,17 @@ private:
                                 const sf::Vector2f& pos);
 
     void initialize_single_text(sf::Text& text, const std::string& str, const sf::Vector2f& position,
-                                unsigned int char_size) const;
+                                unsigned int char_size, const sf::Font& font) const;
 
-    void initialize_texts(unsigned int label_char_size, unsigned int ranges_char_size);
+    void initialize_texts(unsigned int label_char_size, unsigned int ranges_char_size, const sf::Font& font);
     void initialize_slider_range();
     void initialize_slider();
-    float normalize() const;
-    bool slider_is_pressed(const ExtendedRenderWindow& window) const;
-    bool slider_is_in_range() const;
+    [[nodiscard]] float normalize() const;
+    [[nodiscard]] bool slider_is_pressed(const ExtendedRenderWindow& window) const;
+    [[nodiscard]] bool slider_is_in_range() const;
     void follow_mouse(const ExtendedRenderWindow& window) const;
-    bool slider_is_outside_range_left() const;
-    bool slider_is_outside_range_right() const;
+    [[nodiscard]] bool slider_is_outside_range_left() const;
+    [[nodiscard]] bool slider_is_outside_range_right() const;
     void place_back_on_range(bool left) const;
     void update_value() const;
     void update_label() const;
@@ -45,7 +44,8 @@ public:
                     const std::string& str,
                     float* val,
                     unsigned int label_char_size,
-                    unsigned int ranges_char_size);
+                    unsigned int ranges_char_size,
+                    const sf::Font& font);
 
     void update(const ExtendedRenderWindow& window) const;
     ~Slider();
