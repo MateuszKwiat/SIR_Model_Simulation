@@ -11,12 +11,11 @@
 
 class SimulationWindow : public sf::RectangleShape {
 private:
-    sf::Text title;
     std::array<Particle*, 120> particles {};
     std::mt19937* rng_pointer;
     std::uniform_real_distribution<float>* x_distribution {};
     std::uniform_real_distribution<float>* y_distribution {};
-    std::uniform_real_distribution<float>* movement_distribution {};
+    std::uniform_real_distribution<float>* angle_distribution {};
 
 private:
     void initlialize_particles(const sf::Vector2f& pos, const sf::Vector2f& size, float particle_radius);

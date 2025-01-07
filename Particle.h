@@ -10,6 +10,6 @@ private:
     sf::Vector2f velocity;
 public:
     Particle(float radius, const sf::Vector2f& pos, const sf::Vector2f& velocity);
-    void update(float angle, const sf::Rect<float>& window_rect);
+    void update(const sf::Angle& angle, const sf::Rect<float>& window_rect);
 };
 

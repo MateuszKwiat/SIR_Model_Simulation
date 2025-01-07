@@ -37,9 +37,9 @@ int main()
         &c1, &c2, &c3, c1 + c2 + c3, font);
 
     // ============================= Simulation window ===================================
-    // auto sim_size = sf::Vector2f(200.f, 200.f);
-    // auto sim_position = sf::Vector2f(530.f, 10.f);
-    // SimulationWindow sim(sim_position, sim_size,2.f, gen);
+    auto sim_size = sf::Vector2f(200.f, 200.f);
+    auto sim_position = sf::Vector2f(530.f, 10.f);
+    SimulationWindow sim(sim_position, sim_size,2.f, gen);
 
     while (window.isOpen())
     {
@@ -51,13 +51,13 @@ int main()
                 if (key_pressed->scancode == sf::Keyboard::Scancode::Escape)
                     window.close();
         }
-        // sim.update();
+        sim.update();
         slider.update(window);
 
         window.clear();
         window.draw(plot);
         window.draw(slider);
-        // window.draw(sim);
+        window.draw(sim);
 
         window.display();
     }
