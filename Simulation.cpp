@@ -48,6 +48,11 @@ void Simulation::initialize_test_objects() {
     constexpr auto sim_size = sf::Vector2f(200.f, 200.f);
     constexpr auto sim_position = sf::Vector2f(530.f, 10.f);
     simulation_window = new SimulationWindow(sim_position, sim_size,2.f, *gen);
+
+    // ================================== Button =========================================
+    constexpr auto button_size = sf::Vector2f(100.f, 50.f);
+    constexpr auto button_position = sf::Vector2f(740.f, 10.f);
+    button = new Button(button_position, button_size, "Hello!", *font);
 }
 
 void Simulation::run() const {
@@ -61,14 +66,25 @@ void Simulation::run() const {
                 if (key_pressed->scancode == sf::Keyboard::Scancode::Escape)
                     window->close();
         }
-        simulation_window->update();
-        slider->update(*window);
 
-        window->clear();
-        window->draw(*populations_plot);
-        window->draw(*slider);
-        window->draw(*simulation_window);
-
-        window->display();
+        this->handle_updates();
+        this->handle_drawing();
     }
+}
+
+void Simulation::handle_drawing() const {
+    window->clear();
+
+    window->draw(*populations_plot);
+    window->draw(*slider);
+    window->draw(*simulation_window);
+    window->draw(*button);
+
+    window->display();
+}
+
+void Simulation::handle_updates() const {
+    simulation_window->update();
+    slider->update(*window);
+    button->is_pressed(*window);
 }

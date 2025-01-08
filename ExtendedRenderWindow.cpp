@@ -39,3 +39,8 @@ void ExtendedRenderWindow::draw(const SimulationWindow& simulation_window) {
         RenderWindow::draw(*particle);
     }
 }
+
+void ExtendedRenderWindow::draw(const Button &button) {
+    RenderWindow::draw(button);
+    RenderWindow::draw(*button.text);
+}

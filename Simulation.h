@@ -10,6 +10,7 @@
 #include "ExtendedRenderWindow.h"
 #include "PopulationsProportionsPlot.h"
 #include "SimulationWindow.h"
+#include "Button.h"
 
 class Simulation {
 private:
@@ -22,9 +23,13 @@ private:
     Slider* slider = nullptr;
     PopulationsProportionsPlot* populations_plot = nullptr;
     SimulationWindow* simulation_window = nullptr;
+    Button* button = nullptr;
 
 private:
     void initialize_test_objects();
+    void handle_drawing() const;
+    void handle_updates() const;
+
 public:
     Simulation();
     ~Simulation();

@@ -11,14 +11,14 @@
 class PopulationsProportionsPlot final : public sf::RectangleShape {
 private:
     PlotBody* plot_body{};
-    PopulationBar* susceptible_population_bar{};
-    PopulationBar* infectious_population_bar{};
-    PopulationBar* recovered_population_bar{};
-    const unsigned int* susceptible_count{};
-    const unsigned int* infectious_count{};
-    const unsigned int* recovered_count{};
+    PopulationBar* susceptible_population_bar = nullptr;
+    PopulationBar* infectious_population_bar = nullptr;
+    PopulationBar* recovered_population_bar = nullptr;
+    const unsigned int* susceptible_count = nullptr;
+    const unsigned int* infectious_count = nullptr;
+    const unsigned int* recovered_count = nullptr;
     const unsigned int population_count{};
-    TextAnnotations* text_annotations{};
+    TextAnnotations* text_annotations = nullptr;
 
 private:
     void initialize_bars();

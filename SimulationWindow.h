@@ -13,9 +13,9 @@ class SimulationWindow : public sf::RectangleShape {
 private:
     std::array<Particle*, 120> particles {};
     std::mt19937* rng_pointer;
-    std::uniform_real_distribution<float>* x_distribution {};
-    std::uniform_real_distribution<float>* y_distribution {};
-    std::uniform_real_distribution<float>* angle_distribution {};
+    std::uniform_real_distribution<float>* x_distribution  = nullptr;
+    std::uniform_real_distribution<float>* y_distribution  = nullptr;
+    std::uniform_real_distribution<float>* angle_distribution  = nullptr;
 
 private:
     void initlialize_particles(const sf::Vector2f& pos, const sf::Vector2f& size, float particle_radius);
@@ -24,5 +24,6 @@ public:
     SimulationWindow(const sf::Vector2f& pos, const sf::Vector2f& size, float particle_radius, std::mt19937& rng);
     ~SimulationWindow() override;
     void update() const;
+
     friend class ExtendedRenderWindow;
 };

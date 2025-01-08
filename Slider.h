@@ -6,16 +6,16 @@ class ExtendedRenderWindow;
 
 class Slider {
 private:
-    float* value;
+    float* value = nullptr;
     float min{};
     float max{};
-    std::string label_str;
-    sf::RectangleShape* slider{};
-    sf::RectangleShape* slider_body{};
-    sf::RectangleShape* slider_range{};
-    sf::Text* label{};
-    sf::Text* range_low{};
-    sf::Text* range_high{};
+    std::string label_str{};
+    sf::RectangleShape* slider = nullptr;
+    sf::RectangleShape* slider_body = nullptr;
+    sf::RectangleShape* slider_range = nullptr;
+    sf::Text* label = nullptr;
+    sf::Text* range_low = nullptr;
+    sf::Text* range_high = nullptr;
     float a{};
     float b{};
 

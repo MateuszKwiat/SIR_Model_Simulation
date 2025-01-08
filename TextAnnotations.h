@@ -8,11 +8,11 @@
 
 class TextAnnotations {
 private:
-    sf::Text* plot_label{};
-    std::array<sf::Text*, 5>* y_ticks{};
-    sf::Text* susceptible_label{};
-    sf::Text* infectious_label{};
-    sf::Text* recovered_label{};
+    sf::Text* plot_label = nullptr;
+    std::array<sf::Text*, 5>* y_ticks = nullptr;
+    sf::Text* susceptible_label = nullptr;
+    sf::Text* infectious_label = nullptr;
+    sf::Text* recovered_label = nullptr;
 
 private:
     void initialize_text(sf::Text* text, const sf::Vector2f& position, unsigned int char_size,
