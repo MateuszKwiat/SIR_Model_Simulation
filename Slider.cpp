@@ -52,7 +52,10 @@ void Slider::initialize_slider_body(const sf::RenderWindow& window, const sf::Ve
     slider_body = new sf::RectangleShape(size);
     slider_body->setOrigin(origin);
     slider_body->setPosition(pos);
-    slider_body->setFillColor(sf::Color(249, 250, 250, 255));
+    // slider_body->setFillColor(sf::Color(249, 250, 250, 255));
+    slider_body->setFillColor(sf::Color(44, 46, 48, 255));
+    slider_body->setOutlineColor(sf::Color::White);
+    slider_body->setOutlineThickness(1);
 }
 
 void Slider::initialize_slider_range() {
@@ -90,7 +93,7 @@ void Slider::initialize_single_text(sf::Text& text, const std::string& str, cons
     text.setString(str);
     text.setCharacterSize(char_size);
     text.setStyle(sf::Text::Bold);
-    text.setFillColor(sf::Color::Black);
+    text.setFillColor(sf::Color(249, 250, 250, 255));
     text.setOrigin(sf::Vector2f(text.getLocalBounds().size.x / 2.f, text.getLocalBounds().size.y / 2.f));
     text.setPosition(position);
 }

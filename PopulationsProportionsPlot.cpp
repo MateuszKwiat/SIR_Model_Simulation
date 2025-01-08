@@ -13,7 +13,10 @@ PopulationsProportionsPlot::PopulationsProportionsPlot(const sf::Vector2f& posit
                                                        const sf::Font& font) : population_count(population_count) {
     this->setPosition(position);
     this->setSize(size);
-    this->setFillColor(sf::Color(249, 250, 250, 255));
+    // this->setFillColor(sf::Color(249, 250, 250, 255));
+    this->setFillColor(sf::Color(44, 46, 48, 255));
+    this->setOutlineColor(sf::Color::White);
+    this->setOutlineThickness(1);
     this->susceptible_count = susceptible_count;
     this->infectious_count = infectious_count;
     this->recovered_count = recovered_count;

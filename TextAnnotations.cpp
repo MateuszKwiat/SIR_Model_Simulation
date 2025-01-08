@@ -69,7 +69,7 @@ void TextAnnotations::initialize_y_ticks(const sf::Vector2f& plot_size, const sf
     for (auto& y_tick : *y_ticks) {
         y_tick = new sf::Text(font, std::format("{:.2f}", ticks[i++]), static_cast<unsigned int>(plot_size.y / 25.f));
         y_tick->setPosition(sf::Vector2f(current_tick_position.x - y_tick->getGlobalBounds().size.x / 2.f, current_tick_position.y - y_tick->getGlobalBounds().size.y / 2.f));
-        y_tick->setFillColor(sf::Color::Black);
+        y_tick->setFillColor(sf::Color(249, 250, 250, 255));
         current_tick_position.y += distance_between_lines;
     }
 }
@@ -80,7 +80,7 @@ void TextAnnotations::initialize_text(sf::Text *text, const sf::Vector2f &positi
     text->setString(str);
     text->setCharacterSize(char_size);
     text->setStyle(sf::Text::Bold);
-    text->setFillColor(sf::Color::Black);
+    text->setFillColor(sf::Color(249, 250, 250, 255));
     text->setOrigin(sf::Vector2f(text->getGlobalBounds().size.x / 2.f, text->getLocalBounds().size.y / 2.f));
     text->setPosition(position);
 }

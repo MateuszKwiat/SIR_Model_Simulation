@@ -16,6 +16,8 @@ private:
     sf::Text* label{};
     sf::Text* range_low{};
     sf::Text* range_high{};
+    float a{};
+    float b{};
 
 private:
     void initialize_slider_body(const sf::RenderWindow& window, const sf::Vector2f& size,
